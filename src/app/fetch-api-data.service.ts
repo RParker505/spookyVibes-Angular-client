@@ -4,7 +4,7 @@ import { Observable, throwError, catchError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'YOUR_HOSTED_API_URL_HERE/';
+const apiUrl = 'https://spookyvibes-d90e0cfd567b.herokuapp.com/';
 //@injectable decorator to define a service class that is avl application-wide at the root
 @Injectable({
   providedIn: 'root'
