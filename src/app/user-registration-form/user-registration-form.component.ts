@@ -22,6 +22,7 @@ export class UserRegistrationFormComponent implements OnInit {
       public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
       public snackBar: MatSnackBar) { }
   
+  //called once component receives all the inputs
   ngOnInit(): void {
   }
   
