@@ -33,13 +33,14 @@ ngOnInit(): void {
 // If login fails, shows a failure notification
 loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((response) => {
-      localStorage.setItem('user', JSON.stringify(response.user));
-      localStorage.setItem('token', response.token);
+      console.log(response);
       this.dialogRef.close(); // This will close the modal on success!
       this.snackBar.open(`Login successful, Welcom ${response.user.username}`, 'OK', {
         duration: 2000
      });
-    this.router.navigate(['movies']);
+      localStorage.setItem('user', JSON.stringify(response.user));
+      localStorage.setItem('token', response.token);
+      this.router.navigate(['movies']);
     }, (response) => {
       this.snackBar.open('Login failed', 'OK', {
         duration: 2000
