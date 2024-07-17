@@ -7,8 +7,8 @@
 <div style="display: flex; flex-wrap: wrap;">
     <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;" class="moviecard">
         <mat-card-header>
-        <mat-card-title>{{movie.Title}}</mat-card-title>
-            <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+        <mat-card-title class="card-title">{{movie.Title}}</mat-card-title>
+            <mat-card-subtitle class="card-subtitle">Directed by: {{movie.Director.Name}}</mat-card-subtitle>
         </mat-card-header>
         <img src={{movie.ImagePath}} alt= {{movie.Title}} class="movie-image" />
         <mat-card-actions>
