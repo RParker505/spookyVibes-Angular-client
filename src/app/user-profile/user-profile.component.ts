@@ -77,6 +77,6 @@ export class UserProfileComponent implements OnInit {
   
   logout(): void {
     this.router.navigate(["welcome"]);
-    localStorage.removeItem("user");
+    localStorage.clear();
   }
 }
