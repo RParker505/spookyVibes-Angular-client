@@ -49,4 +49,14 @@ showGenre(movie: any): void {
   })
 }
 
+showDirector(movie: any): void {
+  this.dialog.open(MovieDetailsComponent, {
+      data: {
+          title: String(movie.Director.Name).toUpperCase(),
+          content: movie.Director.Bio
+      },
+      width: "400px"
+  })
+}
+
 }
