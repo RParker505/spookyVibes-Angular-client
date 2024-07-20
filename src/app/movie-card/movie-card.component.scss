@@ -24,3 +24,11 @@
 .moviecard-button {
     margin: 5px;
 }
+
+button.favorite {
+    color: red; /* Change color for favorite */
+}
+  
+  button.not-favorite {
+    color: gray; /* Change color for not favorite */
+}
