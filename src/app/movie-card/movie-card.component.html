@@ -1,42 +1,48 @@
-<h1>
-    Welcome to SpookyVibes
-</h1>
-<h2>
-    Start browsing!
-</h2>
-<div style="display: flex; flex-wrap: wrap;">
-    <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;" class="moviecard">
-        <mat-card-header>
-        <mat-card-title class="card-title">{{movie.Title}}</mat-card-title>
-            <mat-card-subtitle class="card-subtitle">Directed by: {{movie.Director.Name}}</mat-card-subtitle>
-        </mat-card-header>
-        <img src={{movie.ImagePath}} alt= {{movie.Title}} class="movie-image" />
-        <mat-card-actions>
-            <button
-                mat-raised-button
-                color="primary"
-                class="moviecard-button"
-                (click)="showGenre(movie)"
-            >
-                Genre
-            </button>
-            <button
-                mat-raised-button
-                color="primary"
-                class="moviecard-button"
-                (click)="showDirector(movie)"
-            >
-                Director
-            </button>
-            <button
-                mat-raised-button
-                color="primary"
-                class="moviecard-button"
-                (click)="showSynopsis(movie)"
-            >
-                Synopsis
-            </button>
-            <mat-icon>favorite_border</mat-icon>
-        </mat-card-actions>
-    </mat-card>  
+<div>
+    <nav>
+        <button mat-raised-button color="primary" (click)="redirectProfile()">User Profile</button>
+        <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+    </nav>
+    <h1>
+        Welcome to SpookyVibes
+    </h1>
+    <h2>
+        Start browsing!
+    </h2>
+    <div style="display: flex; flex-wrap: wrap;">
+        <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;" class="moviecard">
+            <mat-card-header>
+            <mat-card-title class="card-title">{{movie.Title}}</mat-card-title>
+                <mat-card-subtitle class="card-subtitle">Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+            </mat-card-header>
+            <img src={{movie.ImagePath}} alt= {{movie.Title}} class="movie-image" />
+            <mat-card-actions>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    class="moviecard-button"
+                    (click)="showGenre(movie)"
+                >
+                    Genre
+                </button>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    class="moviecard-button"
+                    (click)="showDirector(movie)"
+                >
+                    Director
+                </button>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    class="moviecard-button"
+                    (click)="showSynopsis(movie)"
+                >
+                    Synopsis
+                </button>
+                <mat-icon>favorite_border</mat-icon>
+            </mat-card-actions>
+        </mat-card>  
+    </div>
 </div>
