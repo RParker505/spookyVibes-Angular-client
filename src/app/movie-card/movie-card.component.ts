@@ -69,4 +69,34 @@ showSynopsis(movie: any): void {
   })
 }
 
+modifyFavoriteMovies(movie: any): void {
+  let user = JSON.parse(localStorage.getItem("user") || "");
+  let icon = document.getElementById(`${movie._id}-favorite-icon`);
+
+  if (user.favoriteMovies.includes(movie._id)) {
+      this.fetchApiData.deleteFavoriteMovies(movie._id).subscribe(response => {
+          icon?.setAttribute("fontIcon", "favorite_border");
+
+          console.log("Successfully removed movie from user favorites")
+          console.log(response);
+          user.FavoriteMovies = response.FavoriteMovies;
+          localStorage.setItem("user", JSON.stringify(user));
+      }, err => {
+          console.error(err)
+      })
+  } else {
+      this.fetchApiData.addFavoriteMovies(movie._id).subscribe(response => {
+          icon?.setAttribute("fontIcon", "favorite");
+
+          console.log("Successfully added movie to user favorites")
+          console.log(response);
+          user.FavoriteMovies = response.FavoriteMovies;
+          localStorage.setItem("user", JSON.stringify(user));
+      }, err => {
+          console.error(err)
+      })
+  }
+  localStorage.setItem("user", JSON.stringify(user));
+}
+
 }
