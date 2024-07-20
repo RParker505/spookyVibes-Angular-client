@@ -89,10 +89,24 @@ export class FetchApiDataService {
   }
 
 // Get user endpoint
-  getUser(): Observable<any> {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return user;
+  // getUser(): Observable<any> {
+  //   const user = JSON.parse(localStorage.getItem('user') || '{}');
+  //   return user;
+  // }
+
+// Get user endpoint
+  getUser(username: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + 'users/' + username, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      })
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
   }
+
 // Get favorite movies for a user endpoint
 getFavoriteMovies(username: string): Observable<any> {
   const token = localStorage.getItem('token');
