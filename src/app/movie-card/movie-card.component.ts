@@ -59,4 +59,14 @@ showDirector(movie: any): void {
   })
 }
 
+showSynopsis(movie: any): void {
+  this.dialog.open(MovieDetailsComponent, {
+      data: {
+          title: String(movie.Title).toUpperCase(),
+          content: movie.Description
+      },
+      width: "400px"
+  })
+}
+
 }
