@@ -102,7 +102,7 @@ getFavoriteMovies(username: string): Observable<any> {
       Authorization: 'Bearer ' + token,
     })}).pipe(
     map(this.extractResponseData),
-    //map((data) => data.FavoriteMovies),
+    map((data) => data.FavoriteMovies),
     catchError(this.handleError)
   );
 }
