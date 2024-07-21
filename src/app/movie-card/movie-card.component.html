@@ -41,7 +41,10 @@
                 >
                     Synopsis
                 </button>
-                <mat-icon>favorite_border</mat-icon>
+                <button mat-icon-button color="warn"
+                    (click)="isFavoriteMovie(movie._id) ? removeFavMovies(movie._id) : addFavMovies(movie._id)">
+                    <mat-icon>{{isFavoriteMovie(movie._id) ? 'favorite' : 'favorite_border' }}</mat-icon>
+                </button>
             </mat-card-actions>
         </mat-card>  
     </div>

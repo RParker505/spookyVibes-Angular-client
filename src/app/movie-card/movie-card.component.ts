@@ -3,6 +3,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-movie-card',
@@ -11,16 +12,22 @@ import { MovieDetailsComponent } from '../movie-details/movie-details.component'
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
+  user: any = {};
+  FavoriteMovies: any[] = [];
+  isFavMovie: boolean = false;
+  userData = { Username: "", FavoriteMovies: [] };
 
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
     public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) { }
 
 // Lifecycle hook called when Angular has created the component
 ngOnInit(): void {
   this.getMovies();
+  this.getFavMovies();
 }
 
 getMovies(): void {
@@ -68,6 +75,42 @@ showSynopsis(movie: any): void {
       },
       width: "400px"
   })
+}
+
+getFavMovies(): void {
+  this.user = this.fetchApiData.getUser();
+  this.userData.FavoriteMovies = this.user.FavoriteMovies;
+  this.FavoriteMovies = this.user.FavoriteMovies;
+  console.log('User fav movies', this.FavoriteMovies);
+}
+
+isFavoriteMovie(movieID: string): boolean {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  return user.FavoriteMovies.indexOf(movieID) >= 0;
+}
+
+addFavMovies(movie: string): void {
+  this.user = this.fetchApiData.getUser();
+  this.userData.Username = this.user.Username;
+  this.fetchApiData.addFavoriteMovies(movie).subscribe((response) => {
+    localStorage.setItem('user', JSON.stringify(response));
+    this.getFavMovies();
+    this.snackBar.open('Movie has been added to your favorites!', 'OK', {
+      duration: 3000,
+    });
+  });
+}
+
+removeFavMovies(movie: any): void {
+  this.user = this.fetchApiData.getUser();
+  this.userData.Username = this.user.Username;
+  this.fetchApiData.deleteFavoriteMovies(movie).subscribe((response) => {
+    localStorage.setItem('user', JSON.stringify(response));
+    this.getFavMovies();
+    this.snackBar.open('Movie has been deleted from your favorites!', 'OK', {
+      duration: 3000,
+    });
+  });
 }
 
 }
