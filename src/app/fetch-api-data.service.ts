@@ -67,7 +67,7 @@ export class FetchApiDataService {
 // Get director endpoint
   getDirector(name: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'movies/directors/' + name, {headers: new HttpHeaders(
+    return this.http.get(apiUrl + 'movies/director/' + name, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
