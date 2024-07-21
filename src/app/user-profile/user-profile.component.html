@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <button
     mat-raised-button
     (click)="backToMovies()"
@@ -96,7 +97,7 @@ Logout
     <!--favorites-->
   
     <div class="favs-container">
-      <h3>Your Favorite Movies</h3>
+      <h3 class="favorites-header">Your Favorite Movies</h3>
       <div class="fav-movies">
         <mat-card *ngFor="let movie of FavoriteMovies;" class="movie-card">
         <mat-card-header>
