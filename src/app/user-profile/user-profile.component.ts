@@ -64,6 +64,18 @@ export class UserProfileComponent implements OnInit {
     console.log(`Favorite movies include ${this.FavoriteMovies}`);
   }
 
+  removeFavMovies(movie: any): void {
+    this.user = this.fetchApiData.getUser();
+    this.userData.Username = this.user.Username;
+    this.fetchApiData.deleteFavoriteMovies(movie).subscribe((response) => {
+      localStorage.setItem('user', JSON.stringify(response));
+      this.getFavMovies();
+      this.snackBar.open('Movie has been deleted from your favorites!', 'OK', {
+        duration: 3000,
+      });
+    });
+  }
+
   resetUser(): void {
     this.userData = JSON.parse(localStorage.getItem("user") || "");
   }
