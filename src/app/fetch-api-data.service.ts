@@ -110,8 +110,7 @@ getFavoriteMovies(username: string): Observable<any> {
   addFavoriteMovies( movieID: string ): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
-    console.log('in fetch api service: ', movie);
-    console.log('in fetch api service_id: ', movie._id);
+    console.log('in fetch api service_id: ', movieID);
     return this.http.post(apiUrl + 'users/' + user.Username + '/movies/' + movieID, null, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
@@ -125,7 +124,7 @@ getFavoriteMovies(username: string): Observable<any> {
   deleteFavoriteMovies( movieID: string): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
-    console.log('in fetch api service: ', movie._id);
+    console.log('in fetch api service: ', movieID);
     return this.http.delete(apiUrl + 'users/' + user.Username + '/movies/' + movieID, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
