@@ -99,9 +99,18 @@ Logout
       <h3>Your Favorite Movies</h3>
       <div class="fav-movies">
         <mat-card *ngFor="let movie of FavoriteMovies;">
+        <mat-card-header>
+            <mat-card-title class="card-title">{{movie.Title}}</mat-card-title>
+        </mat-card-header>
           <mat-card-content>
             <img class="movie-posters" src="{{movie.ImagePath}}" alt="{{movie.Title}}" />
           </mat-card-content>
+          <mat-card-actions>
+            <button mat-icon-button color="warn"
+                (click)="removeFavMovies(movie._id)">
+                <mat-icon>favorite</mat-icon>
+            </button>
+        </mat-card-actions>
         </mat-card>
         <div *ngIf="!FavoriteMovies || FavoriteMovies.length === 0">
           <p>You have no favorite movies.</p>
