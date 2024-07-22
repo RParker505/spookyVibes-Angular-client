@@ -2,15 +2,28 @@
     <mat-toolbar>
       <span class="site-name">SpookyVibes</span>
       <span class="spacer"></span>
-      <button mat-icon-button (click)="launchMovies()" class="movie-icon"
-        aria-label="icon button with a clapperboard icon">
+      <button mat-icon-button
+            (click)="launchMovies()"
+            matTooltip="View All Movies"
+            class="movie-icon"
+            aria-label="icon button with a clapperboard icon"
+      >
         <mat-icon>movie</mat-icon>
       </button>
-      <button mat-icon-button (click)="launchProfile()" class="account-icon"
-        aria-label="icon-button with account circle icon">
+      <button mat-icon-button
+            (click)="launchProfile()"
+            matTooltip="My Profile"
+            class="account-icon"
+            aria-label="icon-button with account circle icon"
+      >
         <mat-icon>account_circle</mat-icon>
       </button>
-      <button mat-icon-button (click)="logoutUser()" class="logout-icon" aria-label="icon button with logout icon">
+      <button mat-icon-button
+            (click)="logoutUser()"
+            matTooltip="Logout"
+            class="logout-icon"
+            aria-label="icon button with logout icon"
+      >
         <mat-icon>logout</mat-icon>
       </button>
     </mat-toolbar>
