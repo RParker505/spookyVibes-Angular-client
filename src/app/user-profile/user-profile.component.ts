@@ -80,10 +80,6 @@ export class UserProfileComponent implements OnInit {
     this.userData = JSON.parse(localStorage.getItem("user") || "");
   }
 
-  backToMovies(): void {
-    this.router.navigate(["movies"]);
-  }
-
   logout(): void {
     this.router.navigate(["welcome"]);
     localStorage.clear();
