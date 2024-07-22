@@ -51,8 +51,13 @@ export class UserProfileComponent implements OnInit {
     if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       this.fetchApiData.deleteUser().subscribe((response) => {
         console.log('Deleted User', response);
+        this.snackBar.open('Profile deleted successfully', 'OK', {
+          duration: 2000
+        });
         localStorage.clear();
         this.router.navigate(['welcome']);
+      }, (error) => {
+        console.error('Error deleting user', error);
       });
     }
   }
