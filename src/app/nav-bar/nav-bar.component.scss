@@ -1,12 +1,26 @@
+:host {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Adjust as needed to ensure the nav-bar stays above other content */
+  background-color: white; /* Ensure the background color is set */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for better visibility */
+}
+
+.mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-name {
+  margin-left: 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
 .spacer {
-    flex: 1 1 auto;
-  }
-  
-  .nav-bar {
-    height: 100px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    width: 100%;
-  }
+  flex: 1;
+}
