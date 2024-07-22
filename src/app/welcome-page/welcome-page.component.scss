@@ -1,0 +1,36 @@
+// .welcome-container {
+//     display: flex;
+//     justify-content: center;
+//     flex-wrap: wrap;
+//   }
+  
+//   h1 {
+//     font-size: 100px;
+//     margin-top: 300px;
+//     color: #008B8B;
+//   }
+
+  .welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    height: 100vh; /* Full viewport height */
+    text-align: center; /* Center the text within the container */
+  }
+  
+  .welcome-container h1 {
+    font-size: 80px;
+    color: #483D8B;
+    margin-bottom: 20px; /* Space between the heading and the buttons */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+  }
+  
+  .button-container button {
+    margin: 0 20px; /* Add horizontal space between the buttons */
+    font-size: 18px;
+  }
