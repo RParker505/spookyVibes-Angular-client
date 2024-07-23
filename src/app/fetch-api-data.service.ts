@@ -137,7 +137,10 @@ getFavoriteMovies(username: string): Observable<any> {
 // Edit user endpoint
   editUser(userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + 'users/' + userDetails.Username, userDetails, {headers: new HttpHeaders(
+    const { Username } = JSON.parse(
+      localStorage.getItem('user') || '{}'
+    );
+    return this.http.put(apiUrl + 'users/' + Username, userDetails, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(

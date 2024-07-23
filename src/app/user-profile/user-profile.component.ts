@@ -10,10 +10,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserProfileComponent implements OnInit {
 
-  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '', FavoriteMovies: [] };
+  Username = '';
+  @Input() userDetails = {
+    Username: '',
+    Password: '',
+    Email: '',
+    Birthday: Date,
+    FavoriteMovies: []
+  };
   FavoriteMovies: any[] = [];
   movies: any[] = [];
-  user: any = {};
+  currentUser: any = {};
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -27,25 +34,33 @@ export class UserProfileComponent implements OnInit {
   }
 
   userProfile(): void {
-    this.user = this.fetchApiData.getUser();
-    this.userData.Username = this.user.Username;
-    this.userData.Password = this.user.Password;
-    this.userData.Email = this.user.Email;
-    this.userData.Birthday = this.user.Birthday;
+    this.currentUser = this.fetchApiData.getUser();
+    this.userDetails.Username = this.currentUser.Username;
+    this.userDetails.Password = this.currentUser.Password;
+    this.userDetails.Email = this.currentUser.Email;
+    this.userDetails.Birthday = this.currentUser.Birthday;
     this.fetchApiData.getAllMovies().subscribe((response) => {
-      this.FavoriteMovies = response.filter((movie: any) => this.user.FavoriteMovies.includes(movie._id));
+      this.FavoriteMovies = response.filter((movie: any) => this.currentUser.FavoriteMovies.includes(movie._id));
     });
   }
 
   updateProfile(): void {
-    this.fetchApiData.editUser(this.userData).subscribe((response) => {
-      console.log('Profile Update', response);
+    this.fetchApiData.editUser(this.userDetails).subscribe(      (response: any) => {
+      this.userDetails = response;
+      console.log(response);
       localStorage.setItem('user', JSON.stringify(response));
-      this.snackBar.open('Profile updated successfully', 'OK', {
-        duration: 2000
+      this.userProfile();
+      this.snackBar.open('User Update', 'Success', {
+        duration: 2000,
       });
-    });
-  }
+    },
+    () => {
+      this.snackBar.open('Please try again', 'No success', {
+        duration: 2000,
+      });
+    }
+  );
+}
 
   deleteUser(): void {
     if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
@@ -63,15 +78,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   getFavMovies(): void {
-    this.user = this.fetchApiData.getUser();
-    this.userData.FavoriteMovies = this.user.FavoriteMovies;
-    this.FavoriteMovies = this.user.FavoriteMovies;
+    this.currentUser = this.fetchApiData.getUser();
+    this.userDetails.FavoriteMovies = this.currentUser.FavoriteMovies;
+    this.FavoriteMovies = this.currentUser.FavoriteMovies;
     console.log(`Favorite movies include ${this.FavoriteMovies}`);
   }
 
   removeFavMovies(movie: any): void {
-    this.user = this.fetchApiData.getUser();
-    this.userData.Username = this.user.Username;
+    this.currentUser = this.fetchApiData.getUser();
+    this.userDetails.Username = this.currentUser.Username;
     this.fetchApiData.deleteFavoriteMovies(movie).subscribe((response) => {
       localStorage.setItem('user', JSON.stringify(response));
       this.getFavMovies();
@@ -82,7 +97,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   resetUser(): void {
-    this.userData = JSON.parse(localStorage.getItem("user") || "");
+    this.userDetails = JSON.parse(localStorage.getItem("user") || "");
   }
 
   logout(): void {

@@ -3,11 +3,11 @@
     <!--logged in user profile at a quick glance-->
     <mat-card class="user-details-card">
       <mat-card-header>
-        <mat-card-title class="user-header">Hi, {{user.Username}}</mat-card-title>
+        <mat-card-title class="user-header">Hi, {{currentUser.Username}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p><b>Username: </b>{{user.Username}}</p>
-        <p><b>Email: </b> {{user.Email}}</p>
+        <p><b>Username: </b>{{currentUser.Username}}</p>
+        <p><b>Email: </b> {{currentUser.Email}}</p>
       </mat-card-content>
     </mat-card>
   
@@ -22,29 +22,29 @@
                 <label>Username</label>
                 <input
                     matInput
-                    [(ngModel)]="userData.Username"
+                    [(ngModel)]="userDetails.Username"
                     placeholder="Username"
                     type="text"
                     name="Username"
                     required
                 >
             </mat-form-field>
-            <mat-form-field style="margin-right: 10px;">
+            <!-- <mat-form-field style="margin-right: 10px;">
                 <label>Password</label>
                 <input
                     matInput
-                    [(ngModel)]="userData.Password"
+                    [(ngModel)]="userDetails.Password"
                     type = "password"
                     placeholder="Password"
                     name="Password"
                     required
                 >
-            </mat-form-field>
+            </mat-form-field> -->
             <mat-form-field style="margin-right: 10px;">
                 <label>Email</label>
                 <input
                     matInput
-                    [(ngModel)]="userData.Email"
+                    [(ngModel)]="userDetails.Email"
                     type = "email"
                     placeholder="Email"
                     name="Email"
@@ -55,7 +55,7 @@
                 <label>Birthday</label>
                 <input
                     matInput
-                    [(ngModel)]="userData.Birthday"
+                    [(ngModel)]="userDetails.Birthday"
                     type = "date"
                     placeholder="Birthday"  
                     name="Birthday"
