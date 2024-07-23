@@ -2,11 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
+  providers: [DatePipe] 
 })
 export class UserProfileComponent implements OnInit {
 
@@ -15,7 +17,7 @@ export class UserProfileComponent implements OnInit {
     Username: '',
     Password: '',
     Email: '',
-    Birthday: Date,
+    Birthday: '',
     FavoriteMovies: []
   };
   FavoriteMovies: any[] = [];
@@ -25,7 +27,8 @@ export class UserProfileComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +41,7 @@ export class UserProfileComponent implements OnInit {
     this.userDetails.Username = this.currentUser.Username;
     this.userDetails.Password = this.currentUser.Password;
     this.userDetails.Email = this.currentUser.Email;
-    this.userDetails.Birthday = this.currentUser.Birthday;
+    this.userDetails.Birthday = this.datePipe.transform(this.currentUser.Birthday, 'yyyy-MM-dd',"UTC") || '';
     this.fetchApiData.getAllMovies().subscribe((response) => {
       this.FavoriteMovies = response.filter((movie: any) => this.currentUser.FavoriteMovies.includes(movie._id));
     });
