@@ -10,6 +10,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Router } from '@angular/router';
 
+/**
+ * UserLoginFormComponent allows a registered user to log in to the app.
+ */
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
@@ -17,8 +20,20 @@ import { Router } from '@angular/router';
 })
 export class UserLoginFormComponent implements OnInit {
 
+  /**
+   * Object holding user data for login
+   * @property {string} Username - User's username
+   * @property {string} Password - User's password
+   */
   @Input() userData = { Username: '', Password: '' };
 
+  /**
+   * Creates an instance of the UserLoginFormComponent
+   * @param fetchApiData - Service to interact with the API.
+   * @param dialogRef - Referenece to the dialog opened.
+   * @param snackBar - Service to show notifications to the user.
+   * @param router - Service to route user to other views on the app.
+   */
   constructor(
       public fetchApiData: FetchApiDataService,
       public dialogRef: MatDialogRef<UserLoginFormComponent>,
@@ -26,11 +41,19 @@ export class UserLoginFormComponent implements OnInit {
       public router: Router
   ) { }
 
+/**
+ * Lifecycle hook is called after Angular has initialized all data-bound properties.
+ * The hook is called when the first change detection is run on the component.
+ */
 ngOnInit(): void {
 }
 
-// This is the function responsible for sending the form inputs to the backend and adding token to local storage
-// If login fails, shows a failure notification
+/**
+ * Logs in the user by sending userData object to the backend.
+ * On success, user data and token are added to local storage and a success message is shown.
+ * After log in, user is routed to movies page.
+ * If login fails, error message is displayed.
+ */
 loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((response) => {
       console.log(response);
